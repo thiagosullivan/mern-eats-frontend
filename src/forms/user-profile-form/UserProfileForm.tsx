@@ -19,17 +19,17 @@ const formSchema = z.object({
   name: z.string().min(1, {message: "name is required"}),
   addressLine1: z.string().min(1, {message: "Address Line 1 is required"}),
   city: z.string().min(1, {message: "City is required"}),
-  Country: z.string().min(1, {message: "Country is required"}),
+  country: z.string().min(1, {message: "Country is required"}),
 });
 
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
 };
 
-const UserProfileForm = ({ isLoading, onSave }: Props) => {
+const UserProfileForm = ({ onSave, isLoading }: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
   });
@@ -103,7 +103,7 @@ const UserProfileForm = ({ isLoading, onSave }: Props) => {
           />
           <FormField
             control={form.control}
-            name="Country"
+            name="country"
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Country</FormLabel>
